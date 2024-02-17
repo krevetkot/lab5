@@ -2,13 +2,24 @@ import commandManagers.Command;
 import commandManagers.CommandManager;
 import commandManagers.commands.Help;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+
+import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) { //убрать нафиг эти эксепшоны, сделать нормально
         CommandManager commandManager = new CommandManager();
+        try {
+            CollectionManager.loadCollection();
+        } catch (Exception e){
+            System.out.println("AAAAAAAAAAAAAAAA");
+        }
+        exit(0);
+
+
 
         while (true){
             Scanner console = new Scanner(System.in);

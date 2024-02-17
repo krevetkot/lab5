@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<Collection>
-    <Dragon>
-        <id>1</id>
-        <name>Vasya</name>
-        <coordinates>
-            <x>1</x>
-            <y>2</y>
-        </coordinates>
-        <creationDate>15.02.2024</creationDate>
-        <age>10</age>
-        <weight>100</weight>
-        <speaking>True</speaking>
-        <type>WATER</type>
-        <killer>
-            <name>Petya</name>
-            <passportID>12345</passportID>
-            <eyeColor>GREEN</eyeColor>
-            <hairColor>BROWN</hairColor>
-            <nationality>USA</nationality>
-        </killer>
-    </Dragon>
-</Collection>
+
+<Dragon>
+    <id>1</id>
+    <name>Vasya</name>
+    <coordinates>
+        <x>1</x>
+        <y>2</y>
+    </coordinates>
+    <creationDate>15.02.2024</creationDate>
+    <age>10</age>
+    <weight>100</weight>
+    <speaking>True</speaking>
+    <type>WATER</type>
+    <killer>
+        <name>Petya</name>
+        <passportID>12345</passportID>
+        <eyeColor>GREEN</eyeColor>
+        <hairColor>BROWN</hairColor>
+        <nationality>USA</nationality>
+    </killer>
+</Dragon>

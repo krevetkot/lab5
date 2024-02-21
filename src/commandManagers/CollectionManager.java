@@ -1,11 +1,8 @@
+package commandManagers;
+
 import java.io.FileNotFoundException;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.stream.Collectors;
 
 import collection.*;
 
@@ -23,19 +20,34 @@ public class CollectionManager {
         //и добавляем этого дракона в общую коллекцию, перед этим проверив, что она существует и она одна
 
 
-        BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
-        String body = br.lines().collect(Collectors.joining());
-        System.out.println(body);
-        StringReader reader = new StringReader(body);
-        JAXBContext context = JAXBContext.newInstance(Dragon.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
-        dragon.print();
+//        BufferedReader br = new BufferedReader(new FileReader(commandManagers.CollectionManager.fileName));
+//        String body = br.lines().collect(Collectors.joining());
+//        System.out.println(body);
+//        StringReader reader = new StringReader(body);
+//        JAXBContext context = JAXBContext.newInstance(Dragon.class);
+//        Unmarshaller unmarshaller = context.createUnmarshaller();
+//        Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
+//        dragon.print();
+
+        //у меня тут пока ниче не работает, так что пока без загрузки :) ну а че, пока с консоли фигачим
+
+
 
 
     }
 
     public static void setFileName(String fileName) {
         CollectionManager.fileName = fileName;
+    }
+
+    public static ArrayList<Dragon> getCollection(){
+        if (collectionOfDragons==null){
+            collectionOfDragons = new ArrayList<Dragon>();
+        }
+        return collectionOfDragons;
+    }
+
+    public static void addElementToCollection(Dragon value){
+        getCollection().add(value);
     }
 }

@@ -16,4 +16,15 @@ public class Person {
     private Color hairColor; //Поле может быть null
     @XmlElement(name="nationality")
     private Country nationality; //Поле не может быть null
+
+    @Override
+    public String toString(){
+        return this.getClass().getName() + '{'
+                + ", name= \'" + this.name + '\''
+                + ", pasport id=" + this.passportID
+                + ", eye color=" + this.eyeColor
+                + ", hair color=" + this.hairColor
+                + ", nationality=" + this.nationality
+                + '}';
+    }
 }

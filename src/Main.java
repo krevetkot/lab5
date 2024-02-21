@@ -1,10 +1,8 @@
+import commandManagers.CollectionManager;
 import commandManagers.Command;
 import commandManagers.CommandManager;
-import commandManagers.commands.Help;
 
 
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -12,12 +10,13 @@ import static java.lang.System.exit;
 public class Main {
     public static void main(String[] args) { //убрать нафиг эти эксепшоны, сделать нормально
         CommandManager commandManager = new CommandManager();
-        try {
-            CollectionManager.loadCollection();
-        } catch (Exception e){
-            System.out.println("AAAAAAAAAAAAAAAA");
-        }
-        exit(0);
+
+//        try {
+//            CollectionManager.loadCollection();
+//        } catch (Exception e){
+//            System.out.println("AAAAAAAAAAAAAAAA");
+//        }
+//        exit(0);
 
 
 
@@ -30,6 +29,8 @@ public class Main {
                 Command command = commandManager.getCommandMap().get(listRequest[0]);
                 command.execute();
             }
+
+            //весь блок выше должен лежать в экзекьюторе
 
             //мы должны сначала проверять, есть ли такая команда в мапе, потом узнать, сколько у нее аргументов (0, 1, много)
             //потом мы берем массив листРеквест, копируем его без первого элемента в какой-нибудь другой листЛистРеквест

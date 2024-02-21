@@ -11,9 +11,7 @@ public abstract class Command {
         this.countArg = countArg;
     }
 
-    public Command(){
-
-    }
+    public Command(){}
 
     public String getName(){
         return this.name;

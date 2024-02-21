@@ -45,6 +45,25 @@ public class Dragon {
     public void print(){
         System.out.println(this.id + this.name);
     }
+
+    public java.time.LocalDate getCreationDate(){
+        return creationDate;
+    }
+
+    @Override
+    public String toString(){
+        return this.getClass().getName() + '{'
+                + "id= " + this.id
+                + ", name= \'" + this.name + '\''
+                + ", coordinates=" + this.coordinates
+                + ", creation date=" + this.creationDate
+                + ", age=" + this.age
+                + ", weight=" + this.weight
+                + ", speaking=" + this.speaking
+                + ", type=" + this.type
+                + ", killer=" + this.killer.toString()
+                + '}';
+    }
 }
 
 //ура мы сделали конструктор, мы такие молодцы

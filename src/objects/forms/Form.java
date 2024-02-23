@@ -21,7 +21,7 @@ public abstract class Form<T> {
         System.out.println();
 
         boolean flag = true;
-        while (flag) {
+        while (true) {
             String str = scanner.nextLine();
             for (Enum value : values) {
                 if (value.toString().equals(str)) {
@@ -32,11 +32,8 @@ public abstract class Form<T> {
                     return null;
                 }
             }
-            if (flag) {
-                System.out.print("Такого значения нет, попробуйте еще раз.");
-            }
+                System.out.println("Такого значения нет, попробуйте еще раз.");
         }
-        return null;
     }
     //есть опасноть, что зациклится нафиг
 }

@@ -1,4 +1,7 @@
-package commandManagers;
+package commands;
+
+import managers.CollectionManager;
+import managers.CommandManager;
 
 public abstract class Command {
     protected String name = ""; //название команды
@@ -12,7 +15,6 @@ public abstract class Command {
     }
 
     public Command(){}
-
     public String getName(){
         return this.name;
     }

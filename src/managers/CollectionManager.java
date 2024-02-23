@@ -1,10 +1,10 @@
-package commandManagers;
+package managers;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import collection.*;
+import objects.*;
 
 import javax.xml.bind.*;
 

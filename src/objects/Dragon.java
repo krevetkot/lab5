@@ -1,7 +1,5 @@
-package collection;
-import jdk.jfr.DataAmount;
+package objects;
 
-import javax.xml.bind.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

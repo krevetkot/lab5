@@ -1,4 +1,4 @@
-package collection;
+package objects;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,6 +16,14 @@ public class Person {
     private Color hairColor; //Поле может быть null
     @XmlElement(name="nationality")
     private Country nationality; //Поле не может быть null
+
+    public Person(String name, String passportID, Color eyeColor, Color hairColor, Country nationality){
+        this.name = name;
+        this.passportID = passportID;
+        this.eyeColor = eyeColor;
+        this.hairColor = hairColor;
+        this.nationality = nationality;
+    }
 
     @Override
     public String toString(){

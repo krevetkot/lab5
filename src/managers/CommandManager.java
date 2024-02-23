@@ -1,9 +1,8 @@
-package commandManagers;
+package managers;
 
-import commandManagers.commands.*;
+import commands.*;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class CommandManager {
 
@@ -12,8 +11,10 @@ public class CommandManager {
     public CommandManager(){
         commandMap = new LinkedHashMap<>();
 
-        commandMap.put("help", new Help());
+        commandMap.put("help", new Help(this));
         commandMap.put("info", new Info());
+        commandMap.put("add", new Add());
+        commandMap.put("show", new Show());
         //переделать, чтобы чел сам узнавал, какие у нас есть команды йоу йоу
         //интересно это можно сделать так: узнать все названия классов в пакете коммандс ?
     }
@@ -21,4 +22,6 @@ public class CommandManager {
     public LinkedHashMap<String, Command> getCommandMap(){
         return commandMap;
     }
+
+
 }

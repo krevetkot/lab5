@@ -1,8 +1,7 @@
-package commandManagers.commands;
+package commands;
 
-import collection.Dragon;
-import commandManagers.CollectionManager;
-import commandManagers.Command;
+import objects.Dragon;
+import managers.CollectionManager;
 
 import java.util.ArrayList;
 

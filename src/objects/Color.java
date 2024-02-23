@@ -1,4 +1,4 @@
-package collection;
+package objects;
 
 public enum Color {
     GREEN,

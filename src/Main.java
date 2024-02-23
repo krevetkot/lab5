@@ -1,14 +1,12 @@
-import commandManagers.CollectionManager;
-import commandManagers.Command;
-import commandManagers.CommandManager;
+import commands.Command;
+import managers.CommandManager;
+import objects.DragonType;
 
 
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
 public class Main {
-    public static void main(String[] args) { //убрать нафиг эти эксепшоны, сделать нормально
+    public static void main(String[] args) {
         CommandManager commandManager = new CommandManager();
 
 //        try {
@@ -17,6 +15,7 @@ public class Main {
 //            System.out.println("AAAAAAAAAAAAAAAA");
 //        }
 //        exit(0);
+
 
 
 
@@ -45,6 +44,8 @@ public class Main {
 //                while ((line = reader.readLine()) != null) {
 //                    System.out.println(line + "\n");
 //                }
+
+
         }
     }
 }

@@ -20,15 +20,12 @@ public abstract class Form<T> {
         }
         System.out.println();
 
-        boolean flag = true;
         while (true) {
             String str = scanner.nextLine();
             for (Enum value : values) {
                 if (value.toString().equals(str)) {
-                    flag = false;
                     return value;
                 } else if (str.isEmpty()) {
-                    flag = false;
                     return null;
                 }
             }

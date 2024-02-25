@@ -1,34 +1,31 @@
 import commands.Command;
+import managers.CollectionManager;
 import managers.CommandManager;
 import managers.GeneratorID;
+import managers.RuntimeManager;
 import objects.DragonType;
+
+import jakarta.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 
 
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
-        CommandManager commandManager = new CommandManager();
 
-//        try {
-//            CollectionManager.loadCollection();
-//        } catch (Exception e){
-//            System.out.println("AAAAAAAAAAAAAAAA");
-//        }
-//        exit(0);
-
-
-        while (true) {
-            Scanner console = new Scanner(System.in);
-            String request = console.nextLine();
-            request = request.trim();
-            String[] listRequest = request.split(" ");
-            if (commandManager.getCommandMap().containsKey(listRequest[0])) {
-                Command command = commandManager.getCommandMap().get(listRequest[0]);
-                command.execute();
-            }
+        try {
+            CollectionManager.loadCollection();
         }
+        catch (JAXBException e1){
+            System.out.println(e1.getCause());
+        }
+        catch (FileNotFoundException e2){
+            System.out.println("222222");
+        }
+
+//        RuntimeManager.launch();
+
 
         //весь блок выше должен лежать в экзекьюторе
 

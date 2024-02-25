@@ -26,7 +26,7 @@ public abstract class GeneratorID {
 
     }
 
-    public static String generatePassportID(){
-        return UUID.randomUUID().toString();
-    }
+//    public static String generatePassportID(){
+//        return UUID.randomUUID().toString();
+//    }
 }

@@ -47,12 +47,11 @@ public class DragonForm extends Form<Dragon>{
         //добавить проверку, что введено больше 0 и не нулл
         System.out.println("Введите вес: ");
         Long weight = Long.parseLong(scanner.nextLine());
-        System.out.println("Введите, умеет ли говорить дракон (1 - умеет, 0 - не умеет): ");
+        System.out.println("Введите, умеет ли говорить дракон (true/false): ");
         boolean speaking = Boolean.parseBoolean(scanner.nextLine());
         DragonType type = (DragonType)askEnum(DragonType.values(), "тип дракона");
         PersonForm personForm = new PersonForm();
         Person killer = personForm.build();
         return new Dragon(GeneratorID.generateID(), name, coords, LocalDate.now(), age, weight, speaking, type, killer);
-        //генератор айди тут должен хуярить
     }
 }

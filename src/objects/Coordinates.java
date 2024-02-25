@@ -1,8 +1,8 @@
 package objects;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Coordinates {
@@ -14,5 +14,15 @@ public class Coordinates {
     public Coordinates(Long x, float y){
         this.x = x;
         this.y = y;
+    }
+
+    public Coordinates(){}
+
+    @Override
+    public String toString(){
+        return this.getClass().getName() + '{'
+                + "x= " + this.x
+                + ", y= " + this.y
+                + '}';
     }
 }

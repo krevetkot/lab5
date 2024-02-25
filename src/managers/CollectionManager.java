@@ -1,12 +1,14 @@
 package managers;
 
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import objects.*;
 
-import javax.xml.bind.*;
+import jakarta.xml.bind.*;
 
 public class CollectionManager {
     private static ArrayList<Dragon> collectionOfDragons;
@@ -19,21 +21,25 @@ public class CollectionManager {
         //тут короче парсим данные из xml файлика. создаем объект дракона, засовываем туда данные
         //и добавляем этого дракона в общую коллекцию, перед этим проверив, что она существует и она одна
 
+        BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
+        String body = br.lines().collect(Collectors.joining());
+        StringReader reader = new StringReader(body);
+        JAXBContext context = JAXBContext.newInstance(Dragon.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
+        System.out.println(dragon.toString());
 
-//        BufferedReader br = new BufferedReader(new FileReader(commandManagers.CollectionManager.fileName));
-//        String body = br.lines().collect(Collectors.joining());
-//        System.out.println(body);
-//        StringReader reader = new StringReader(body);
-//        JAXBContext context = JAXBContext.newInstance(Dragon.class);
-//        Unmarshaller unmarshaller = context.createUnmarshaller();
-//        Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
-//        dragon.print();
+    }
 
-        //у меня тут пока ниче не работает, так что пока без загрузки :) ну а че, пока с консоли фигачим
-
-
-
-
+    public static void saveCollection() throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Dragon.class);
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        Coordinates coord = new Coordinates(1L, 2);
+        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA);
+        Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
+        File file = new File("collection.xml");
+        marshaller.marshal(dragon, file);
     }
 
     public static void setFileName(String fileName) {

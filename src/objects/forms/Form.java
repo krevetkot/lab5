@@ -21,7 +21,7 @@ public abstract class Form<T> {
         System.out.println();
 
         while (true) {
-            String str = scanner.nextLine();
+            String str = scanner.nextLine().trim();
             for (Enum value : values) {
                 if (value.toString().equals(str)) {
                     return value;
@@ -32,5 +32,59 @@ public abstract class Form<T> {
                 System.out.println("Такого значения нет, попробуйте еще раз.");
         }
     }
-    //есть опасноть, что зациклится нафиг
+
+    //параметр greaterthanzero означает, нужна ли нам проверка, что число больше нуля, или не нужна
+    public static Long askLong(String name, Boolean greaterThanZero){
+        System.out.print("Введите " + name + ":");
+        while (true) {
+            String str = scanner.nextLine().trim();
+            Long res = null;
+            try {
+                res = Long.parseLong(str);
+            } catch (NumberFormatException e) {
+                System.out.println("Значение должно быть числом типа Long! Попробуйте еще раз.");
+            }
+            if (greaterThanZero){
+                if (res > 0) {
+                    return res;
+                }
+                else {
+                    System.out.println("Значение должно быть больше нуля! Попробуйте еще раз.");
+                }
+            }
+            else {
+                return res;
+            }
+
+        }
+    }
+
+    public static Boolean askBoolean(String name){
+        System.out.print("Введите " + name + ":");
+        while (true) {
+            String str = scanner.nextLine().trim();
+            Boolean res = null;
+            try {
+                res = Boolean.parseBoolean(str);
+                return res;
+            } catch (NumberFormatException e) {
+                System.out.println("Можно ввести только true или false! Попробуйте еще раз.");
+            }
+        }
+    }
+
+    public static float askFloat(String name){
+        System.out.print("Введите " + name + ":");
+        while (true) {
+            String str = scanner.nextLine().trim();
+            float res;
+            try {
+                res = Float.parseFloat(str);
+                return res;
+            } catch (NumberFormatException e) {
+                System.out.println("Значение должно быть числом типа float! Попробуйте еще раз.");
+            }
+        }
+    }
+
 }

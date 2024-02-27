@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dragon>
-    <id>1</id>
+    <id>18347624</id>
     <name>Vasya</name>
     <coordinates>
         <x>1</x>
         <y>2.0</y>
     </coordinates>
-    <creationDate/>
+    <creationDate>2024-02-27</creationDate>
     <age>1</age>
     <weight>2</weight>
-    <speking>true</speking>
+    <speaking>true</speaking>
     <type>WATER</type>
     <killer>
         <name>Petya</name>

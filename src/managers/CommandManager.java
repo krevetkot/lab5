@@ -15,6 +15,8 @@ public class CommandManager {
         commandMap.put("info", new Info());
         commandMap.put("add", new Add());
         commandMap.put("show", new Show());
+        commandMap.put("load", new Load());
+        commandMap.put("save", new Save());
         //переделать, чтобы чел сам узнавал, какие у нас есть команды йоу йоу
         //интересно это можно сделать так: узнать все названия классов в пакете коммандс ?
     }

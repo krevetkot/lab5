@@ -4,7 +4,13 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import lombok.Getter;
+import managers.DateAdapter;
+import managers.IDManager;
 
+import java.time.LocalDate;
+@Getter
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Dragon {
@@ -15,22 +21,36 @@ public class Dragon {
     @XmlElement(name="coordinates")
     private Coordinates coordinates; //Поле не может быть null
 
+    @XmlElement(name = "creationDate", required = true)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
 
-    @XmlElement(name="creationDate")
-    private String creationDateS;
     @XmlElement(name="age")
     private Long age; //Значение поля должно быть больше 0, Поле не может быть null
     @XmlElement(name="weight")
     private Long weight; //Значение поля должно быть больше 0, Поле не может быть null
-    @XmlElement(name="speking")
+    @XmlElement(name="speaking")
     private boolean speaking;
     @XmlElement(name="type")
     private DragonType type; //Поле может быть null
     @XmlElement(name="killer")
     private Person killer; //Поле может быть null
 
-    public Dragon(int id, String name, Coordinates coordinates, java.time.LocalDate creationDate, Long age, Long weight, boolean speaking, DragonType type, Person killer){
+    //without id and date
+    public Dragon(String name, Coordinates coordinates, Long age, Long weight, boolean speaking, DragonType type, Person killer){
+        this.id = IDManager.generateID();
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = LocalDate.now();
+        this.age = age;
+        this.weight = weight;
+        this.speaking = speaking;
+        this.type = type;
+        this.killer = killer;
+    }
+
+    //with all fields
+    public Dragon(int id, String name, Coordinates coordinates, LocalDate creationDate, Long age, Long weight, boolean speaking, DragonType type, Person killer){
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -43,10 +63,6 @@ public class Dragon {
     }
 
     public Dragon(){}
-
-    public java.time.LocalDate getCreationDate(){
-        return creationDate;
-    }
 
     @Override
     public String toString(){
@@ -63,7 +79,4 @@ public class Dragon {
                 + '}';
     }
 
-    public int getId(){
-        return this.id;
-    }
 }

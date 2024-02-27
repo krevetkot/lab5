@@ -3,10 +3,8 @@ package managers;
 import objects.Dragon;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.UUID;
 
-public abstract class GeneratorID {
+public abstract class IDManager {
 
     public static int generateID(){
         ArrayList<Dragon> collection = CollectionManager.getCollection();
@@ -26,7 +24,19 @@ public abstract class GeneratorID {
 
     }
 
-//    public static String generatePassportID(){
-//        return UUID.randomUUID().toString();
-//    }
+    public static boolean passportIDisUnique(String passportID){
+        ArrayList<Dragon> collection = CollectionManager.getCollection();
+        boolean flag = true;
+        for (Dragon element : collection) {
+            if (element.getKiller().getPassportID() == passportID) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -18,8 +18,10 @@ public class CollectionManager {
         System.out.println("Пожалуйста, введите имя файла, из которого вы хотите загрузить коллекцию:");
         Scanner console = new Scanner(System.in);
         CollectionManager.setFileName(console.nextLine());
+
         //тут короче парсим данные из xml файлика. создаем объект дракона, засовываем туда данные
         //и добавляем этого дракона в общую коллекцию, перед этим проверив, что она существует и она одна
+        //и что дракон не идентичен какому-то еще
 
         BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
         String body = br.lines().collect(Collectors.joining());
@@ -27,7 +29,8 @@ public class CollectionManager {
         JAXBContext context = JAXBContext.newInstance(Dragon.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
-        System.out.println(dragon.toString());
+
+        addElementToCollection(dragon);
 
     }
 
@@ -56,4 +59,5 @@ public class CollectionManager {
     public static void addElementToCollection(Dragon value){
         getCollection().add(value);
     }
+
 }

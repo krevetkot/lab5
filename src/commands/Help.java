@@ -8,12 +8,12 @@ public class Help extends Command {
     private CommandManager commandManager;
 
     public Help(CommandManager commandManager){
-        super("help", "вывести справку по доступным командам", 0);
+        super("help", "вывести справку по доступным командам", false);
         this.commandManager = commandManager;
     }
 
     @Override
-    public void execute() {
+    public void execute(String argument) {
         Collection<Command> commands = commandManager.getCommandMap().values();
             System.out.println("Доступны команды:");
             for (Command command : commands) {

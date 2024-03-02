@@ -1,27 +1,20 @@
 package commands;
 
-import managers.CollectionManager;
-import managers.CommandManager;
+import lombok.Getter;
 
+@Getter
 public abstract class Command {
     protected String name = ""; //название команды
     protected String description = ""; //описание команды
-    protected int countArg; //колво аргументов
+    protected boolean args; //колво аргументов
 
-    public Command(String name, String description, int countArg){
+    public Command(String name, String description, boolean args){
         this.name = name;
         this.description = description;
-        this.countArg = countArg;
+        this.args = args;
     }
 
     public Command(){}
-    public String getName(){
-        return this.name;
-    }
 
-    public String getDescription(){
-        return this.description;
-    }
-
-    public abstract void execute();
+    public abstract void execute(String argument);
 }

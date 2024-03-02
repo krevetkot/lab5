@@ -1,8 +1,8 @@
 package managers;
 
 import commands.Command;
-import jakarta.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
+
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class RuntimeManager {
@@ -31,7 +31,25 @@ public class RuntimeManager {
             String[] listRequest = request.split(" ");
             if (commandManager.getCommandMap().containsKey(listRequest[0])) {
                 Command command = commandManager.getCommandMap().get(listRequest[0]);
-                command.execute();
+
+                if (command.isArgs()){
+                    try {
+                        String argument = listRequest[1];
+                        command.execute(argument);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e){
+                        System.out.println("Вы не ввели аргумент команды. Попробуйте еще раз.");
+                    }
+                    catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+                else{
+                    command.execute(null);
+                }
+            }
+            else {
+                System.out.println("Такой команды нет! Попробуйте снова.");
             }
         }
     }

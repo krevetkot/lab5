@@ -28,15 +28,11 @@ public abstract class IDManager {
         ArrayList<Dragon> collection = CollectionManager.getCollection();
         boolean flag = true;
         for (Dragon element : collection) {
-            if (element.getKiller().getPassportID() == passportID) {
+            if (element.getKiller().getPassportID().equals(passportID)) {
                 flag = false;
+                break;
             }
         }
-        if (flag) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return flag;
     }
 }

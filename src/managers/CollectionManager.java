@@ -1,8 +1,10 @@
 package managers;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,7 @@ public class CollectionManager {
     private static ArrayList<Dragon> collectionOfDragons;
     private static String fileName;
 
-    public static void loadCollection() throws FileNotFoundException, JAXBException {
+    public static void loadCollection() throws IOException, JAXBException {
         System.out.println("Пожалуйста, введите имя файла, из которого вы хотите загрузить коллекцию:");
         Scanner console = new Scanner(System.in);
         CollectionManager.setFileName(console.nextLine());
@@ -32,9 +34,13 @@ public class CollectionManager {
 
         addElementToCollection(dragon);
 
+        System.out.println("Коллекция загружена.");
+
+//        br.close();
+
     }
 
-    public static void saveCollection() throws JAXBException {
+    public static void saveCollection() throws JAXBException, IOException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Dragon.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -42,7 +48,12 @@ public class CollectionManager {
         Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA);
         Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
         File file = new File("collection.xml");
+//        marshaller.marshal(dragon, new OutputStreamWriter(Files.newOutputStream(file.toPath())));
+
         marshaller.marshal(dragon, file);
+
+        System.out.println("Коллекция сохранена.");
+
     }
 
     public static void setFileName(String fileName) {
@@ -58,6 +69,10 @@ public class CollectionManager {
 
     public static void addElementToCollection(Dragon value){
         getCollection().add(value);
+    }
+
+    public static Dragon getById(long id){
+        return collectionOfDragons.stream().filter(x -> x.getId() == id).findAny().orElse(null);
     }
 
 }

@@ -17,13 +17,16 @@ public class PersonForm extends Form<Person>{
             name = scanner.nextLine().trim();
             if (name.isBlank()){
                 System.out.println("Строка не может быть пустой! Попробуйте еще раз.");
+            }
+            else {
                 break;
             }
         }
 
         System.out.println("Введите паспортные данные: ");
-        String passportID = scanner.nextLine().trim();
+        String passportID = null;
         while(true){
+            passportID = scanner.nextLine().trim();
             if (IDManager.passportIDisUnique(passportID)){
                 break;
             }
@@ -32,9 +35,9 @@ public class PersonForm extends Form<Person>{
             }
         }
 
-        Color eyeColor = (Color)askEnum(Color.values(), "цвет глаз");
-        Color hairColor = (Color)askEnum(Color.values(), "цвет волос");
-        Country nationality = (Country)askEnum(Country.values(), "национальность");
+        Color eyeColor = (Color)askEnum(Color.values(), "цвет глаз", false);
+        Color hairColor = (Color)askEnum(Color.values(), "цвет волос", true);
+        Country nationality = (Country)askEnum(Country.values(), "национальность", false);
 
         return new Person(name, passportID, eyeColor, hairColor, nationality);
     }

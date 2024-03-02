@@ -16,7 +16,17 @@ public class DragonForm extends Form<Dragon> {
     public Dragon build() {
         System.out.println("Введите данные о драконе.");
         System.out.println("Введите имя: ");
-        String name = scanner.nextLine().trim();
+        String name = null;
+        while(true){
+            name = scanner.nextLine().trim();
+            if (name.isBlank()){
+                System.out.println("Строка не может быть пустой! Попробуйте еще раз.");
+            }
+            else {
+                break;
+            }
+        }
+        //бесит меня, выделить в отдельный метод
 
         CoordinatesForm coordinatesForm = new CoordinatesForm();
         Coordinates coords = coordinatesForm.build();
@@ -24,10 +34,13 @@ public class DragonForm extends Form<Dragon> {
         Long age = askLong("возраст", true);
         Long weight = askLong("вес", true);
         boolean speaking = askBoolean("умеет ли говорить дракон (true/false)");
-        DragonType type = (DragonType) askEnum(DragonType.values(), "тип дракона");
+        DragonType type = (DragonType) askEnum(DragonType.values(), "тип дракона", true);
 
-        PersonForm personForm = new PersonForm();
-        Person killer = personForm.build();
+        boolean hasKiller = askBoolean("есть ли у дракона убийца (true/false)");
+        Person killer = null;
+        if (hasKiller){PersonForm personForm = new PersonForm();
+            killer = personForm.build();
+        }
 
         return new Dragon(IDManager.generateID(), name, coords, LocalDate.now(), age, weight, speaking, type, killer);
     }

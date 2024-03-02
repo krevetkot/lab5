@@ -19,4 +19,6 @@ public class Validator {
     public static boolean coordValidation(Coordinates coords){
         return coords.getX() != null;
     }
+
+
 }

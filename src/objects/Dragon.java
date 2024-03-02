@@ -6,11 +6,13 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
+import lombok.Setter;
 import managers.DateAdapter;
 import managers.IDManager;
 
 import java.time.LocalDate;
 @Getter
+@Setter
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Dragon {
@@ -66,9 +68,22 @@ public class Dragon {
 
     @Override
     public String toString(){
+        if (killer == null){
+            return this.getClass().getName() + '{'
+                    + "id= " + this.id
+                    + ", name=" + this.name
+                    + ", coordinates=" + this.coordinates
+                    + ", creation date=" + this.creationDate
+                    + ", age=" + this.age
+                    + ", weight=" + this.weight
+                    + ", speaking=" + this.speaking
+                    + ", type=" + this.type
+                    + ", killer=null"
+                    + '}';
+        }
         return this.getClass().getName() + '{'
                 + "id= " + this.id
-                + ", name= \'" + this.name + '\''
+                + ", name=" + this.name
                 + ", coordinates=" + this.coordinates
                 + ", creation date=" + this.creationDate
                 + ", age=" + this.age

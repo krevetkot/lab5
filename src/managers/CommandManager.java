@@ -18,6 +18,13 @@ public class CommandManager {
         commandMap.put("load", new Load());
         commandMap.put("save", new Save());
         commandMap.put("update", new Update());
+        commandMap.put("execute_file", new ExecuteFile(this));
+        commandMap.put("remove_by_id", new RemoveByID());
+        commandMap.put("clear", new Clear());
+        commandMap.put("exit", new Exit());
+        commandMap.put("remove_first", new RemoveFirst());
+        commandMap.put("print_field_descending_age", new PrintFieldDescendingAge());
+
         //переделать, чтобы чел сам узнавал, какие у нас есть команды йоу йоу
         //интересно это можно сделать так: узнать все названия классов в пакете коммандс ?
     }

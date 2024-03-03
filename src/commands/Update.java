@@ -3,7 +3,6 @@ package commands;
 import managers.CollectionManager;
 import objects.Dragon;
 import objects.forms.DragonForm;
-import objects.forms.Form;
 
 import java.util.NoSuchElementException;
 
@@ -11,8 +10,13 @@ public class Update extends Command{
     public Update(){
         super("update", "обновить значение элемента коллекции, id которого равен заданному", true);
     }
+
     @Override
     public void execute(String argument) throws NumberFormatException{
+        if (CollectionManager.getCollection().isEmpty()){
+            throw new NoSuchElementException("Коллекция пока что пуста");
+        }
+
         Long id = Long.parseLong(argument);
 
         Dragon oldDragon = CollectionManager.getById(id);

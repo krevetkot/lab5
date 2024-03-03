@@ -21,9 +21,7 @@ public class CollectionManager {
         Scanner console = new Scanner(System.in);
         CollectionManager.setFileName(console.nextLine());
 
-        //тут короче парсим данные из xml файлика. создаем объект дракона, засовываем туда данные
-        //и добавляем этого дракона в общую коллекцию, перед этим проверив, что она существует и она одна
-        //и что дракон не идентичен какому-то еще
+        //ПРОВЕРИТЬ, ЧТО ДРАКОН УНИКАЛЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
         String body = br.lines().collect(Collectors.joining());
@@ -36,7 +34,7 @@ public class CollectionManager {
 
         System.out.println("Коллекция загружена.");
 
-//        br.close();
+        br.close();
 
     }
 

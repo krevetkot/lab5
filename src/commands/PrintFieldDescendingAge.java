@@ -1,6 +1,10 @@
 package commands;
 
 import managers.CollectionManager;
+import objects.Dragon;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class PrintFieldDescendingAge extends Command{
     public PrintFieldDescendingAge(){
@@ -11,8 +15,15 @@ public class PrintFieldDescendingAge extends Command{
             System.out.println("Коллекция пуста.");
         }
         else {
-            CollectionManager.getCollection().removeFirst();
-            System.out.println("Первый элемент в коллекции удален.");
+            ArrayList<Long> ages = new ArrayList<>();
+            for (Dragon element: CollectionManager.getCollection()){
+                ages.add(element.getAge());
+            }
+            ages.sort(Collections.reverseOrder());
+            System.out.println("Возраста всех драконов в порядке убывания:");
+            for (Long age: ages){
+                System.out.print(age + " ");
+            }
         }
     }
 }

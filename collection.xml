@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dragons>
 <dragon>
-    <id>18347624</id>
+    <id>18348624</id>
     <name>Vasya</name>
     <coordinates>
         <x>1</x>
@@ -19,3 +20,24 @@
         <nationality>CHINA</nationality>
     </killer>
 </dragon>
+<dragon>
+<id>18347624</id>
+<name>Kolya</name>
+<coordinates>
+    <x>1</x>
+    <y>2.0</y>
+</coordinates>
+<creationDate>2024-02-27</creationDate>
+<age>1</age>
+<weight>2</weight>
+<speaking>true</speaking>
+<type>WATER</type>
+<killer>
+    <name>Petya</name>
+    <passportID>3294sdjas</passportID>
+    <eyeColor>RED</eyeColor>
+    <hairColor>BLACK</hairColor>
+    <nationality>CHINA</nationality>
+</killer>
+</dragon>
+</dragons>

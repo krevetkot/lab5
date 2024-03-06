@@ -1,26 +1,27 @@
+import exceptions.FailedBuildingException;
+import jakarta.xml.bind.JAXBException;
+import managers.CollectionManager;
 import managers.RuntimeManager;
+
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
 
-//        try {
-//            CollectionManager.loadCollection();
-//        }
-//        catch (JAXBException e1){
-//            System.out.println(e1.getCause());
-//        }
-//        catch (FileNotFoundException e2){
-//            System.out.println("222222");
-//        }
+        if (args.length == 0){
+            System.out.println("Вы не указали имя файла. Запуск невозможен.");
+            System.exit(1);
+        }
+        String filename = args[0];
+
+        try {
+            CollectionManager.loadCollection(filename);
+        }
+        catch (IOException | JAXBException | FailedBuildingException e){
+            System.out.println(e.getMessage());
+        }
 
         RuntimeManager.launch();
-
-
-        //весь блок выше должен лежать в экзекьюторе
-
-        //мы должны сначала проверять, есть ли такая команда в мапе, потом узнать, сколько у нее аргументов (0, 1, много)
-        //потом мы берем массив листРеквест, копируем его без первого элемента в какой-нибудь другой листЛистРеквест
-        //берем из листЛистРеквест аргументы, проверяем их на валидность и только после этого ЗАПУСКАЕМ
 
     }
 }

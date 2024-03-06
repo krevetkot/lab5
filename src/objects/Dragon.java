@@ -13,7 +13,7 @@ import managers.IDManager;
 import java.time.LocalDate;
 @Getter
 @Setter
-@XmlRootElement
+@XmlRootElement(name = "dragon")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Dragon {
     @XmlElement(name="id")

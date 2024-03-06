@@ -12,7 +12,7 @@ public class Update extends Command{
     }
 
     @Override
-    public void execute(String argument) throws NumberFormatException{
+    public void execute(String argument) throws NumberFormatException, NoSuchElementException{
         if (CollectionManager.getCollection().isEmpty()){
             throw new NoSuchElementException("Коллекция пока что пуста");
         }

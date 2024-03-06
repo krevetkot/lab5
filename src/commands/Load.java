@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.FailedBuildingException;
 import jakarta.xml.bind.JAXBException;
 import managers.CollectionManager;
 
@@ -14,13 +15,10 @@ public class Load extends Command{
     @Override
     public void execute(String argument) {
         try {
-            CollectionManager.loadCollection();
+            CollectionManager.loadCollection(argument);
         }
-        catch (FileNotFoundException e1){
-            System.out.println("Такой файл не найден.");
-        }
-        catch (JAXBException | IOException e2){
-            System.out.println("Упс... Что-то пошло не так :(");
+        catch (JAXBException | IOException | FailedBuildingException e){
+            System.out.println(e.getMessage());
         }
     }
 }

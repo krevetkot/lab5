@@ -1,6 +1,7 @@
 package managers;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,31 +9,47 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import exceptions.FailedBuildingException;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import objects.*;
 
 import jakarta.xml.bind.*;
+import objects.forms.DragonsForParsing;
+
 
 public class CollectionManager {
     private static ArrayList<Dragon> collectionOfDragons;
     private static String fileName;
 
-    public static void loadCollection() throws IOException, JAXBException {
-        System.out.println("Пожалуйста, введите имя файла, из которого вы хотите загрузить коллекцию:");
-        Scanner console = new Scanner(System.in);
-        CollectionManager.setFileName(console.nextLine());
+    public static void loadCollection(String filename) throws IOException, JAXBException, FailedBuildingException {
+        CollectionManager.setFileName(filename);
 
         //ПРОВЕРИТЬ, ЧТО ДРАКОН УНИКАЛЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
         String body = br.lines().collect(Collectors.joining());
         StringReader reader = new StringReader(body);
-        JAXBContext context = JAXBContext.newInstance(Dragon.class);
+        JAXBContext context = JAXBContext.newInstance(DragonsForParsing.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Dragon dragon = (Dragon) unmarshaller.unmarshal(reader);
+        DragonsForParsing dragons = (DragonsForParsing) unmarshaller.unmarshal(reader);
 
-        addElementToCollection(dragon);
-
-        System.out.println("Коллекция загружена.");
+        boolean flag = true;
+        for (Dragon dragon: dragons.getCollectionOfDragons()){
+            if (!Validator.dragonValidation(dragon)){
+                flag = false;
+                break;
+            }
+        }
+        if (flag){
+            collectionOfDragons = dragons.getCollectionOfDragons();
+            System.out.println("Коллекция загружена.");
+        }
+        else {
+            throw new FailedBuildingException("Данные в коллекции не валидны", Dragon.class);
+        }
 
         br.close();
 

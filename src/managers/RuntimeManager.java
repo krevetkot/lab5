@@ -40,6 +40,9 @@ public class RuntimeManager {
                     catch (ArrayIndexOutOfBoundsException e){
                         System.out.println("Вы не ввели аргумент команды. Попробуйте еще раз.");
                     }
+                    catch (NumberFormatException e){
+                        System.out.println("Аргумент должен быть числом.");
+                    }
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }

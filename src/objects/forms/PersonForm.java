@@ -39,6 +39,8 @@ public class PersonForm extends Form<Person>{
         Color hairColor = (Color)askEnum(Color.values(), "цвет волос", true);
         Country nationality = (Country)askEnum(Country.values(), "национальность", false);
 
-        return new Person(name, passportID, eyeColor, hairColor, nationality);
+        long countKilledDragons = askLong("количество убитых драконов", true);
+
+        return new Person(name, passportID, eyeColor, hairColor, nationality, countKilledDragons);
     }
 }

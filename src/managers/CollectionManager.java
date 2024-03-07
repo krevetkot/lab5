@@ -60,7 +60,7 @@ public class CollectionManager {
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         Coordinates coord = new Coordinates(1L, 2);
-        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA);
+        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA, 1L);
         Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
         File file = new File("collection.xml");
 //        marshaller.marshal(dragon, new OutputStreamWriter(Files.newOutputStream(file.toPath())));

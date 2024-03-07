@@ -18,13 +18,16 @@ public class Person {
     private Color hairColor; //Поле может быть null
     @XmlElement(name="nationality")
     private Country nationality; //Поле не может быть null
+    @XmlElement(name="countKilledDragons")
+    private Long countKilledDragons; //Поле должно быть больше 0
 
-    public Person(String name, String passportID, Color eyeColor, Color hairColor, Country nationality){
+    public Person(String name, String passportID, Color eyeColor, Color hairColor, Country nationality, Long countKilledDragons){
         this.name = name;
         this.passportID = passportID;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.nationality = nationality;
+        this.countKilledDragons = countKilledDragons;
     }
 
     public Person(){}
@@ -37,6 +40,7 @@ public class Person {
                 + ", eye color=" + this.eyeColor
                 + ", hair color=" + this.hairColor
                 + ", nationality=" + this.nationality
+                + ", count of killed dragons=" + this.countKilledDragons
                 + '}';
     }
 }

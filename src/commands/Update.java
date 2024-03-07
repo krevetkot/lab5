@@ -17,8 +17,7 @@ public class Update extends Command{
             throw new NoSuchElementException("Коллекция пока что пуста");
         }
 
-        Long id = Long.parseLong(argument);
-
+        long id = Long.parseLong(argument);
         Dragon oldDragon = CollectionManager.getById(id);
 
         if (oldDragon==null){

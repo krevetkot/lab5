@@ -18,6 +18,15 @@ public class InsertAt extends Command{
 
         int index = Integer.parseInt(argument);
 
+        if (index>CollectionManager.getCollection().size()){
+            throw new NoSuchElementException("Индекс должен быть меньше или равен размеру коллекции. Размер = "
+                    + CollectionManager.getCollection().size());
+        }
+
+        if (index<0){
+            throw new NoSuchElementException("Агрумент index должен быть больше или равен нулю.");
+        }
+
         DragonForm newDragon = new DragonForm();
         CollectionManager.getCollection().add(index, newDragon.build());
         System.out.println("Спасибо, ваши данные приняты!");

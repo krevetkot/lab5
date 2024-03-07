@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @XmlRootElement(name = "dragon")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Dragon {
+public class Dragon implements Comparable{
     @XmlElement(name="id")
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @XmlElement(name="name")
@@ -94,4 +94,9 @@ public class Dragon {
                 + '}';
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Dragon anotherDragon = (Dragon) o;
+        return getKiller().getCountKilledDragons().intValue() - anotherDragon.getKiller().getCountKilledDragons().intValue();
+    }
 }

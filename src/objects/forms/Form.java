@@ -19,7 +19,7 @@ public abstract class Form<T> {
         for (Enum value: values){
             System.out.print(value + " ");
         }
-        if (canBeNull){System.out.print("null");}
+        if (canBeNull){System.out.print("null(пустая строка)");}
         System.out.println();
 
         while (true) {
@@ -27,7 +27,7 @@ public abstract class Form<T> {
             for (Enum value : values) {
                 if (value.toString().equals(str)) {
                     return value;
-                } else if (str.equals("null")&&canBeNull) {
+                } else if (str.isEmpty()&&canBeNull) {
                     return null;
                 }
             }

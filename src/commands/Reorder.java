@@ -1,5 +1,10 @@
 package commands;
 
+import managers.CollectionManager;
+
+import java.util.Collection;
+import java.util.Collections;
+
 public class Reorder extends Command{
     public Reorder(){
         super("reorder", "отсортировать коллекцию в порядке, обратном нынешнему", false);
@@ -7,7 +12,8 @@ public class Reorder extends Command{
 
     @Override
     public void execute(String argument) {
-        System.out.println("Пока что эта программа ничего не делает :)");
+        Collections.reverse(CollectionManager.getCollection());
+        System.out.println("Коллекция отсортирована в обратном порядке.");
     }
 
 

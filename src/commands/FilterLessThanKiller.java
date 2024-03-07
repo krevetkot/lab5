@@ -1,20 +1,21 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CollectionManager;
+import managers.Console;
 import objects.Dragon;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class FilterLessThanKiller extends Command{
     public FilterLessThanKiller(){
         super("filter_less_than_killer", "вывести элементы, значение поля killer которых меньше заданного", true);
     }
     @Override
-    public void execute(String argument) throws NumberFormatException, NoSuchElementException{
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException, NumberFormatException, NoSuchElementException{
         if (CollectionManager.getCollection().isEmpty()){
-            System.out.println("Коллекция пуста.");
+            Console.print("Коллекция пуста.", fileMode);
         }
         else {
             Long killer = Long.parseLong(argument);
@@ -29,7 +30,9 @@ public class FilterLessThanKiller extends Command{
                     flag = false;
                 };
             }
-            if (flag){System.out.println("Нет подходящих элементов.");}
+            if (flag) {
+                Console.print("Нет подходящих элементов.", fileMode);
+            }
         }
     }
 

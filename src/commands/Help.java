@@ -1,8 +1,10 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CommandManager;
 
 import java.util.Collection;
+import java.util.Scanner;
 
 public class Help extends Command {
     private CommandManager commandManager;
@@ -13,7 +15,7 @@ public class Help extends Command {
     }
 
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException {
         Collection<Command> commands = commandManager.getCommandMap().values();
             System.out.println("Доступны команды:");
             for (Command command : commands) {

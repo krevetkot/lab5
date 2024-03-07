@@ -1,10 +1,13 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CollectionManager;
+import managers.Console;
 import objects.Dragon;
 import objects.forms.DragonForm;
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class Update extends Command{
     public Update(){
@@ -12,7 +15,7 @@ public class Update extends Command{
     }
 
     @Override
-    public void execute(String argument) throws NumberFormatException, NoSuchElementException{
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException, NumberFormatException, NoSuchElementException{
         if (CollectionManager.getCollection().isEmpty()){
             throw new NoSuchElementException("Коллекция пока что пуста");
         }
@@ -26,10 +29,9 @@ public class Update extends Command{
 
         int index = CollectionManager.getCollection().indexOf(oldDragon);
         int oldID = oldDragon.getId();
-        Dragon changedDragon = new DragonForm().build();
+        Dragon changedDragon = new DragonForm().build(scanner, fileMode);
         changedDragon.setId(oldID);
         CollectionManager.getCollection().set(index, changedDragon);
-
-        System.out.println("Элемент с ID " + id + " обновлен");
+        Console.print("Элемент с ID " + id + " обновлен", fileMode);
     }
 }

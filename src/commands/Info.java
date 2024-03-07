@@ -1,6 +1,9 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.*;
+
+import java.util.Scanner;
 
 public class Info extends Command {
 
@@ -9,7 +12,7 @@ public class Info extends Command {
     }
 
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException {
         if (CollectionManager.getCollection().isEmpty()){
             System.out.println("Коллекция пока что пуста. Тип коллекции: " + CollectionManager.getCollection().getClass());
         }

@@ -15,7 +15,6 @@ public class CommandManager {
         commandMap.put("info", new Info());
         commandMap.put("add", new Add());
         commandMap.put("show", new Show());
-        commandMap.put("load", new Load());
         commandMap.put("save", new Save());
         commandMap.put("update", new Update());
         commandMap.put("execute_file", new ExecuteFile(this));

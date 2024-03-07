@@ -1,7 +1,10 @@
 package commands;
 
 
+import exceptions.IllegalValueException;
 import lombok.Getter;
+
+import java.util.Scanner;
 
 @Getter
 public abstract class Command {
@@ -17,5 +20,5 @@ public abstract class Command {
 
     public Command(){}
 
-    public abstract void execute(String argument);
+    public abstract void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException;
 }

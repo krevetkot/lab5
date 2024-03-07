@@ -1,19 +1,12 @@
 package managers;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import exceptions.FailedBuildingException;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElementWrapper;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import objects.*;
 
 import jakarta.xml.bind.*;
@@ -56,16 +49,20 @@ public class CollectionManager {
     }
 
     public static void saveCollection() throws JAXBException, IOException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Dragon.class);
+        DragonsForParsing dragons = new DragonsForParsing();
+        dragons.setCollectionOfDragons(collectionOfDragons);
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(DragonsForParsing.class);
+//        JAXBContext jaxbContext = JAXBContext.newInstance(Dragon.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        Coordinates coord = new Coordinates(1L, 2);
-        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA, 1L);
-        Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
-        File file = new File("collection.xml");
-//        marshaller.marshal(dragon, new OutputStreamWriter(Files.newOutputStream(file.toPath())));
 
-        marshaller.marshal(dragon, file);
+//        Coordinates coord = new Coordinates(1L, 2);
+//        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA, 1L);
+//        Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
+        File file = new File(fileName);
+
+        marshaller.marshal(dragons, new OutputStreamWriter(Files.newOutputStream(file.toPath())));
 
         System.out.println("Коллекция сохранена.");
 

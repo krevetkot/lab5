@@ -1,16 +1,20 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CollectionManager;
+import managers.Console;
 import objects.forms.DragonForm;
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class InsertAt extends Command{
     public InsertAt(){
         super("insert_at", "добавить новый элемент в заданную позицию", true);
     }
     @Override
-    public void execute(String argument) throws NoSuchElementException, NumberFormatException{
+    public void execute(String argument, boolean fileMode, Scanner scanner)
+            throws NoSuchElementException, NumberFormatException, IllegalValueException{
 
         if (CollectionManager.getCollection().isEmpty()){
             throw new NoSuchElementException("Коллекция пока что пуста");
@@ -28,7 +32,8 @@ public class InsertAt extends Command{
         }
 
         DragonForm newDragon = new DragonForm();
-        CollectionManager.getCollection().add(index, newDragon.build());
-        System.out.println("Спасибо, ваши данные приняты!");
+        CollectionManager.getCollection().add(index, newDragon.build(scanner, fileMode));
+        Console.print("Спасибо, ваши данные приняты!", fileMode);
     }
+
 }

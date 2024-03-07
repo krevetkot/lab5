@@ -1,10 +1,12 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CollectionManager;
 import objects.Dragon;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class MaxByKiller extends Command{
     public MaxByKiller(){
@@ -12,7 +14,7 @@ public class MaxByKiller extends Command{
     }
 
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException {
         if (CollectionManager.getCollection().isEmpty()){
             System.out.println("Коллекция пуста.");
         }

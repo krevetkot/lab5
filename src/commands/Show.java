@@ -1,9 +1,11 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import objects.Dragon;
 import managers.CollectionManager;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Show extends Command {
     public Show(){
@@ -11,7 +13,7 @@ public class Show extends Command {
     }
 
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException {
         ArrayList<Dragon> collection = CollectionManager.getCollection();
         if (collection.isEmpty()){
             System.out.println("Коллекция пуста.");

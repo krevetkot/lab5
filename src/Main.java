@@ -22,6 +22,7 @@ public class Main {
         }
         catch (IOException | JAXBException | FailedBuildingException e){
             System.out.println(e.getMessage());
+            System.out.println("Не удалось загрузить коллекцию.");
         }
 
         RuntimeManager.launch();

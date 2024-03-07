@@ -1,8 +1,8 @@
 package managers;
 
 import commands.Command;
+import exceptions.IllegalValueException;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class RuntimeManager {
@@ -12,18 +12,6 @@ public class RuntimeManager {
         System.out.println("Приветствуем Вас в приложении по управлению коллекцией! Введите \'help\' для вывода доступных команд.");
         commandManager = new CommandManager();
 
-//        try {
-//            CollectionManager.loadCollection();
-//        }
-//        catch (JAXBException e1){
-//            System.out.println("1111111");
-//        }
-//        catch (FileNotFoundException e2){
-//            System.out.println("222222");
-//        }
-        //поменять тут на нормальные трай кэтчи
-
-
         while (true) {
             Scanner console = new Scanner(System.in);
             String request = console.nextLine();
@@ -32,13 +20,16 @@ public class RuntimeManager {
             if (commandManager.getCommandMap().containsKey(listRequest[0])) {
                 Command command = commandManager.getCommandMap().get(listRequest[0]);
 
-                if (command.isArgs()){
+                if (command.isArgs() && listRequest.length>2){
+                    System.out.println("У этой команды должен быть только один аргумент.");
+                }
+                else if (command.isArgs()){
                     try {
                         String argument = listRequest[1];
-                        command.execute(argument);
+                        command.execute(argument, false, console);
                     }
                     catch (ArrayIndexOutOfBoundsException e){
-                        System.out.println("Вы не ввели аргумент команды. Попробуйте еще раз.");
+                        System.out.println("Вы не ввели аргумент команды.");
                     }
                     catch (NumberFormatException e){
                         System.out.println("Аргумент должен быть числом.");
@@ -47,15 +38,20 @@ public class RuntimeManager {
                         System.out.println(e.getMessage());
                     }
                 }
+                else if (listRequest.length>1){
+                    System.out.println("У этой команды не должно быть аргументов.");
+                }
                 else{
-                    command.execute(null);
+                    try {
+                        command.execute(null, false, console);
+                    } catch (IllegalValueException e){
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
             else {
-                System.out.println("Такой команды нет! Попробуйте снова.");
+                System.out.println("Такой команды нет!");
             }
         }
     }
-
-    //выделить метод для экзекьюта в рантаймменеджере
 }

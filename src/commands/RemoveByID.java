@@ -1,17 +1,18 @@
 package commands;
 
+import exceptions.IllegalValueException;
 import managers.CollectionManager;
 import objects.Dragon;
-import objects.forms.DragonForm;
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class RemoveByID extends Command{
     public RemoveByID(){
         super("remove_by_id", "удалить элемент из коллекции по его id", true);}
 
     @Override
-    public void execute(String argument) throws NoSuchElementException, NumberFormatException{
+    public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException, NoSuchElementException, NumberFormatException{
         if (CollectionManager.getCollection().isEmpty()){
             throw new NoSuchElementException("Коллекция пока что пуста");
         }

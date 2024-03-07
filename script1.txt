@@ -1,2 +1,12 @@
-load
-collection.xml
+info
+add
+Katya
+1
+2
+3
+4
+true
+FIRE
+false
+show
+exit

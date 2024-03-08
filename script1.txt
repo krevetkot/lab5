@@ -1,4 +1,6 @@
 info
+show
+info
 add
 Katya
 1
@@ -8,5 +10,8 @@ Katya
 true
 FIRE
 false
-show
+info
+sakdhsa
+show 2
+777
 exit

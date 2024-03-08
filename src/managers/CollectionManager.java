@@ -4,6 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 import exceptions.FailedBuildingException;
@@ -37,8 +40,10 @@ public class CollectionManager {
             }
         }
         if (flag){
-            collectionOfDragons = dragons.getCollectionOfDragons();
+            LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
+            getCollection().addAll(set);
             System.out.println("Коллекция загружена.");
+            //по идее оно должно уничтожать одинаковые экземпляры.... но чето нема
         }
         else {
             throw new FailedBuildingException("Данные в коллекции не валидны", Dragon.class);
@@ -53,13 +58,8 @@ public class CollectionManager {
         dragons.setCollectionOfDragons(collectionOfDragons);
 
         JAXBContext jaxbContext = JAXBContext.newInstance(DragonsForParsing.class);
-//        JAXBContext jaxbContext = JAXBContext.newInstance(Dragon.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-//        Coordinates coord = new Coordinates(1L, 2);
-//        Person killer = new Person("Petya", "3294sdjas", Color.RED, Color.BLACK, Country.CHINA, 1L);
-//        Dragon dragon = new Dragon(1, "Vasya", coord, LocalDate.now(), 1L, 2L, true, DragonType.WATER, killer);
         File file = new File(fileName);
 
         marshaller.marshal(dragons, new OutputStreamWriter(Files.newOutputStream(file.toPath())));

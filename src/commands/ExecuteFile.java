@@ -25,7 +25,8 @@ public class ExecuteFile extends Command{
             BufferedReader br = ScriptManager.getBufferedReaders().getLast();
             Scanner fileScanner = new Scanner(br);
             String line;
-            while((line = br.readLine()) != null){
+
+            while( (line = fileScanner.nextLine()) != null){
                 String[] command = line.split(" ");
                 if (commandManager.getCommandMap().containsKey(command[0])) {
                     if (commandManager.getCommandMap().get(command[0]).isArgs()) {
@@ -44,13 +45,18 @@ public class ExecuteFile extends Command{
                         }
                     }
                 }
+                else {
+                    System.out.println("Команда " + command[0] + " не найдена.");
+                    break;
+                }
             }
+
             br.close();
 
         }
         catch(IOException e){
             System.out.println(e.getMessage());
         }
-
+        System.out.println("Выполнение скрипта завершено.");
     }
 }

@@ -31,5 +31,9 @@ public class Validator {
         return coords.getX() != null;
     }
 
+//    public static boolean dragonIsUnique(Dragon dragon){
+//        return CollectionManager.getCollection().contains(dragon) &&
+//    }
+
 
 }

@@ -3,17 +3,17 @@ package managers;
 import java.io.*;
 import java.nio.file.Files;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import exceptions.FailedBuildingException;
 import objects.*;
 
 import jakarta.xml.bind.*;
 import objects.forms.DragonsForParsing;
+
+//import static jdk.internal.org.jline.reader.impl.LineReaderImpl.CompletionType.List;
 
 
 public class CollectionManager {
@@ -23,7 +23,7 @@ public class CollectionManager {
     public static void loadCollection(String filename) throws IOException, JAXBException, FailedBuildingException {
         CollectionManager.setFileName(filename);
 
-        //ПРОВЕРИТЬ, ЧТО ДРАКОН УНИКАЛЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //ПРОВЕРИТЬ, ЧТО ДРАКОН УНИКАЛЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! в процессе
 
         BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
         String body = br.lines().collect(Collectors.joining());
@@ -32,16 +32,28 @@ public class CollectionManager {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         DragonsForParsing dragons = (DragonsForParsing) unmarshaller.unmarshal(reader);
 
+//        LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
+//        dragons.getCollectionOfDragons().clear();
+//        dragons.getCollectionOfDragons().addAll(set);
+
+        dragons.setCollectionOfDragons((ArrayList<Dragon>)
+                dragons.getCollectionOfDragons().stream().distinct().collect(Collectors.toList()));
+
+        //ей ваще пофиг на все мои телодвижения :////////
+
+
         boolean flag = true;
         for (Dragon dragon: dragons.getCollectionOfDragons()){
-            if (!Validator.dragonValidation(dragon)){
+            if (!Validator.dragonValidation(dragon) || !IDManager.dragonIDisUnique(dragon.getId())){
                 flag = false;
                 break;
             }
         }
         if (flag){
-            LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
-            getCollection().addAll(set);
+//            LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
+//            getCollection().addAll(set);
+            collectionOfDragons = dragons.getCollectionOfDragons();
+            Collections.sort(collectionOfDragons);
             System.out.println("Коллекция загружена.");
             //по идее оно должно уничтожать одинаковые экземпляры.... но чето нема
         }
@@ -79,9 +91,9 @@ public class CollectionManager {
         return collectionOfDragons;
     }
 
-    public static void addElementToCollection(Dragon value){
-        getCollection().add(value);
-    }
+//    public static void addElementToCollection(Dragon value){
+//        getCollection().add(value);
+//    }
 
     public static Dragon getById(long id){
         return collectionOfDragons.stream().filter(x -> x.getId() == id).findAny().orElse(null);

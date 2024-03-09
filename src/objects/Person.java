@@ -5,6 +5,8 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
@@ -42,5 +44,16 @@ public class Person {
                 + ", nationality=" + this.nationality
                 + ", count of killed dragons=" + this.countKilledDragons
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        Person person = (Person) obj;
+        return this.name.equals(person.getName())
+                && Objects.equals(this.passportID, person.getPassportID())
+                && this.eyeColor == person.getEyeColor()
+                && this.hairColor == person.getHairColor()
+                && this.nationality == person.getNationality()
+                && Objects.equals(this.countKilledDragons, person.getCountKilledDragons());
     }
 }

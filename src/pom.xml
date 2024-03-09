@@ -57,6 +57,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jline/jline-reader -->
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-reader</artifactId>
+            <version>3.25.1</version>
+        </dependency>
+
 
     </dependencies>
 

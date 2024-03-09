@@ -6,10 +6,10 @@ import lombok.Getter;
 import java.io.*;
 import java.util.ArrayDeque;
 
+
 public class ScriptManager {
-
+    @Getter
     private static final ArrayDeque<String> pathQueue = new ArrayDeque<>();
-
     @Getter
     private static final ArrayDeque<BufferedReader> bufferedReaders = new ArrayDeque<>();
 
@@ -18,7 +18,9 @@ public class ScriptManager {
         bufferedReaders.add(new BufferedReader(new FileReader(fileName)));
     }
 
-//добавить проверку на рекурсивность
+    public static boolean isRecursive(String path){
+        return pathQueue.contains(new File(path).getAbsolutePath());
+    }
 
 
 }

@@ -5,6 +5,8 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Coordinates {
@@ -26,5 +28,11 @@ public class Coordinates {
                 + "x= " + this.x
                 + ", y= " + this.y
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        Coordinates coords = (Coordinates) obj;
+        return Objects.equals(this.x, coords.getX()) && this.y == coords.getY();
     }
 }

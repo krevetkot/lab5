@@ -3,9 +3,12 @@ package commands;
 import exceptions.IllegalValueException;
 import managers.CommandManager;
 import managers.Console;
+import managers.RuntimeManager;
 import managers.ScriptManager;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -20,43 +23,64 @@ public class ExecuteFile extends Command{
     @Override
     public void execute(String argument, boolean fileMode, Scanner scanner) throws IllegalValueException {
         try {
-            ScriptManager.addFile(argument);
 
+            ScriptManager.addFile(argument);
             BufferedReader br = ScriptManager.getBufferedReaders().getLast();
             Scanner fileScanner = new Scanner(br);
             String line;
 
-            while( (line = fileScanner.nextLine()) != null){
+            Console.print("------ Выполняется файл " + argument  + " ------", false);
+
+            while ((line = fileScanner.nextLine()) != null) {
                 String[] command = line.split(" ");
-                if (commandManager.getCommandMap().containsKey(command[0])) {
-                    if (commandManager.getCommandMap().get(command[0]).isArgs()) {
-                        try {
-                            commandManager.getCommandMap().get(command[0]).execute(command[1], true, fileScanner);
-                            System.out.println("Команда " + command[0] + " выполнена.");
-                        } catch (IllegalValueException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } else {
-                        try {
-                            commandManager.getCommandMap().get(command[0]).execute(null, true, fileScanner);
-                            System.out.println("Команда " + command[0] + " выполнена.");
-                        } catch (IllegalValueException e) {
-                            System.out.println(e.getMessage());
-                        }
+                if (command[0].equals("execute_file")) {
+                    if (ScriptManager.isRecursive(command[1])) {
+                        throw new RuntimeException("Найдена рекурсия! Повторно вызывается файл " + command[1]);
                     }
                 }
-                else {
-                    System.out.println("Команда " + command[0] + " не найдена.");
+
+                try {
+                    RuntimeManager.commandProcessing(command, true, fileScanner);
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
                     break;
                 }
+
+
+//                if (commandManager.getCommandMap().containsKey(command[0])) {
+//                    if (commandManager.getCommandMap().get(command[0]).isArgs()) {
+//                        try {
+//                            commandManager.getCommandMap().get(command[0]).execute(command[1], true, fileScanner);
+//                            System.out.println("-- Команда " + command[0] + " выполнена --");
+//                        } catch (IllegalValueException e) {
+//                            System.out.println(e.getMessage());
+//                        }
+//                    } else {
+//                        try {
+//                            commandManager.getCommandMap().get(command[0]).execute(null, true, fileScanner);
+//                            System.out.println("-- Команда " + command[0] + " выполнена --");
+//                        } catch (IllegalValueException e) {
+//                            System.out.println(e.getMessage());
+//                        }
+//                    }
+//                }
+//                else {
+//                    System.out.println("Команда " + command[0] + " не найдена.");
+//                    break;
+//                }
+
             }
 
+            ScriptManager.getBufferedReaders().removeLast();
+            ScriptManager.getPathQueue().removeLast();
             br.close();
 
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
+            return;
         }
+
         System.out.println("Выполнение скрипта завершено.");
     }
+
 }

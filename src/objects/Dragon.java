@@ -11,6 +11,8 @@ import managers.DateAdapter;
 import managers.IDManager;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
 @Getter
 @Setter
 @XmlRootElement(name = "dragon")
@@ -97,6 +99,26 @@ public class Dragon implements Comparable{
     @Override
     public int compareTo(Object o) {
         Dragon anotherDragon = (Dragon) o;
-        return getKiller().getCountKilledDragons().intValue() - anotherDragon.getKiller().getCountKilledDragons().intValue();
+        return (int)((getCoordinates().getX()*getCoordinates().getX() + getCoordinates().getY()*getCoordinates().getY())
+                        - (anotherDragon.getCoordinates().getX()*anotherDragon.getCoordinates().getX() +
+                        anotherDragon.getCoordinates().getY()*anotherDragon.getCoordinates().getY()));
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        Dragon dragon = (Dragon) obj;
+        return this.id == dragon.getId()
+                && this.name.equals(dragon.getName())
+                && this.coordinates.equals(dragon.getCoordinates())
+                && this.creationDate == dragon.getCreationDate()
+                && Objects.equals(this.age, dragon.getAge())
+                && Objects.equals(this.weight, dragon.getWeight())
+                && this.speaking == dragon.getSpeaking()
+                && this.type == dragon.getType()
+                && this.killer.equals(dragon.getKiller());
+    }
+
+    public boolean getSpeaking(){
+        return this.speaking;
     }
 }

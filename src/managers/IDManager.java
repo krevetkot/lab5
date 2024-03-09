@@ -35,4 +35,16 @@ public abstract class IDManager {
         }
         return flag;
     }
+
+    public static boolean dragonIDisUnique(int dragonID){
+        ArrayList<Dragon> collection = CollectionManager.getCollection();
+        boolean flag = true;
+        for (Dragon element : collection) {
+            if (element.getId() == dragonID) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
 }

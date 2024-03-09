@@ -6,6 +6,7 @@ import objects.Dragon;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MaxByKiller extends Command{
@@ -20,7 +21,13 @@ public class MaxByKiller extends Command{
         }
         else {
             ArrayList<Dragon> dragons = CollectionManager.getCollection();
-            Collections.sort(dragons);
+
+            Collections.sort(dragons, new Comparator<Dragon>() {
+                public int compare(Dragon d1, Dragon d2) {
+                    return Long.valueOf(d1.getKiller().getCountKilledDragons() - d2.getKiller().getCountKilledDragons()).intValue();
+                }
+            });
+
             System.out.println(dragons.getLast().toString());
         }
     }

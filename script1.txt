@@ -1,17 +1,2 @@
 info
-show
-info
-add
-Katya
-1
-2
-3
-4
-true
-FIRE
-false
-info
-sakdhsa
-show 2
-777
-exit
+execute_file script2.txt

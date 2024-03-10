@@ -32,7 +32,21 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
         Coordinates coords = (Coordinates) obj;
         return Objects.equals(this.x, coords.getX()) && this.y == coords.getY();
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 31;
+        hash = hash * 17 + x.hashCode();
+        hash = hash * 17 + (int) y;
+        return hash;
     }
 }

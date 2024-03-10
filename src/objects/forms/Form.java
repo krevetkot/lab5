@@ -1,5 +1,6 @@
 package objects.forms;
 
+import exceptions.FailedBuildingException;
 import exceptions.IllegalValueException;
 import managers.Console;
 import objects.DragonType;
@@ -9,7 +10,7 @@ import java.util.function.Predicate;
 
 public abstract class Form<T> {
 
-    public abstract T build(Scanner scanner, boolean fileMode) throws IllegalValueException;
+    public abstract T build(Scanner scanner, boolean fileMode) throws IllegalValueException, FailedBuildingException;
 
     public static Enum askEnum(Scanner scanner, boolean fileMode, Enum[] values, String enumName, boolean canBeNull)
             throws IllegalValueException{

@@ -1,12 +1,16 @@
 package objects.forms;
 
+import exceptions.FailedBuildingException;
 import exceptions.IllegalValueException;
 import managers.Console;
 import managers.IDManager;
+import managers.Validator;
 import objects.Color;
 import objects.Country;
+import objects.Dragon;
 import objects.Person;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PersonForm extends Form<Person>{
@@ -14,7 +18,7 @@ public class PersonForm extends Form<Person>{
     //fileMode true, когда мы работаем с консольным вводом
     //fileMode false, когда мы работаем с файловым вводом
     @Override
-    public Person build(Scanner scanner, boolean fileMode) throws IllegalValueException {
+    public Person build(Scanner scanner, boolean fileMode) throws IllegalValueException, FailedBuildingException {
         Console.print("Введите данные об убийце дракона.", fileMode);
 
         String name = askString(scanner, fileMode, "имя", false);
@@ -40,6 +44,11 @@ public class PersonForm extends Form<Person>{
 
         long countKilledDragons = askLong(scanner, fileMode,"количество убитых драконов", true);
 
-        return new Person(name, passportID, eyeColor, hairColor, nationality, countKilledDragons);
+        Person newPerson = new Person(name, passportID, eyeColor, hairColor, nationality, countKilledDragons);
+
+        if (!Validator.personValidation(newPerson)){
+            throw new FailedBuildingException("Недопустимое значение в поле!", Person.class);
+        }
+        return newPerson;
     }
 }

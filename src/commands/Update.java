@@ -1,11 +1,13 @@
 package commands;
 
+import exceptions.FailedBuildingException;
 import exceptions.IllegalValueException;
 import managers.CollectionManager;
 import managers.Console;
 import objects.Dragon;
 import objects.forms.DragonForm;
 
+import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -29,9 +31,16 @@ public class Update extends Command{
 
         int index = CollectionManager.getCollection().indexOf(oldDragon);
         int oldID = oldDragon.getId();
-        Dragon changedDragon = new DragonForm().build(scanner, fileMode);
-        changedDragon.setId(oldID);
-        CollectionManager.getCollection().set(index, changedDragon);
-        Console.print("Элемент с ID " + id + " обновлен", fileMode);
+
+        try {
+            Dragon changedDragon = new DragonForm().build(scanner, fileMode);
+            changedDragon.setId(oldID);
+            CollectionManager.getCollection().set(index, changedDragon);
+            Console.print("Элемент с ID " + id + " обновлен", fileMode);
+        } catch (FailedBuildingException e){
+            Console.print(e.getMessage(), false);
+        }
+
+
     }
 }

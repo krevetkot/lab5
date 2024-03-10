@@ -48,6 +48,12 @@ public class Person {
 
     @Override
     public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
         Person person = (Person) obj;
         return this.name.equals(person.getName())
                 && Objects.equals(this.passportID, person.getPassportID())
@@ -55,5 +61,17 @@ public class Person {
                 && this.hairColor == person.getHairColor()
                 && this.nationality == person.getNationality()
                 && Objects.equals(this.countKilledDragons, person.getCountKilledDragons());
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 31;
+        hash = hash * 17 + name.hashCode();
+        hash = hash * 17 + passportID.hashCode();
+        hash = hash * 17 + eyeColor.hashCode();
+        hash = hash * 17 + hairColor.hashCode();
+        hash = hash * 17 + nationality.hashCode();
+        hash = hash * 17 + countKilledDragons.hashCode();
+        return hash;
     }
 }

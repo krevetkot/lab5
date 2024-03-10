@@ -30,8 +30,7 @@ public class ExecuteFile extends Command{
             String line;
 
             Console.print("------ Выполняется файл " + argument  + " ------", false);
-
-            while ((line = fileScanner.nextLine()) != null) {
+            while (!(line = ScriptManager.nextLine(fileScanner)).isBlank()) {
                 String[] command = line.split(" ");
                 if (command[0].equals("execute_file")) {
                     if (ScriptManager.isRecursive(command[1])) {
@@ -45,30 +44,6 @@ public class ExecuteFile extends Command{
                     System.out.println(e.getMessage());
                     break;
                 }
-
-
-//                if (commandManager.getCommandMap().containsKey(command[0])) {
-//                    if (commandManager.getCommandMap().get(command[0]).isArgs()) {
-//                        try {
-//                            commandManager.getCommandMap().get(command[0]).execute(command[1], true, fileScanner);
-//                            System.out.println("-- Команда " + command[0] + " выполнена --");
-//                        } catch (IllegalValueException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    } else {
-//                        try {
-//                            commandManager.getCommandMap().get(command[0]).execute(null, true, fileScanner);
-//                            System.out.println("-- Команда " + command[0] + " выполнена --");
-//                        } catch (IllegalValueException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    }
-//                }
-//                else {
-//                    System.out.println("Команда " + command[0] + " не найдена.");
-//                    break;
-//                }
-
             }
 
             ScriptManager.getBufferedReaders().removeLast();
@@ -80,7 +55,7 @@ public class ExecuteFile extends Command{
             return;
         }
 
-        System.out.println("Выполнение скрипта завершено.");
+        System.out.println("------ Выполнение файла " + argument +  " завершено ------");
     }
 
 }

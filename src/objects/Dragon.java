@@ -106,11 +106,17 @@ public class Dragon implements Comparable{
 
     @Override
     public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
         Dragon dragon = (Dragon) obj;
         return this.id == dragon.getId()
                 && this.name.equals(dragon.getName())
                 && this.coordinates.equals(dragon.getCoordinates())
-                && this.creationDate == dragon.getCreationDate()
+                && this.creationDate.equals(dragon.getCreationDate())
                 && Objects.equals(this.age, dragon.getAge())
                 && Objects.equals(this.weight, dragon.getWeight())
                 && this.speaking == dragon.getSpeaking()
@@ -120,5 +126,22 @@ public class Dragon implements Comparable{
 
     public boolean getSpeaking(){
         return this.speaking;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 31;
+        hash = hash * 17 + name.hashCode();
+        hash = hash * 17 + id;
+        hash = hash * 17 + coordinates.hashCode();
+        hash = hash * 17 + creationDate.hashCode();
+        hash = hash * 17 + age.hashCode();
+        hash = hash * 17 + weight.hashCode();
+        if (speaking){
+            hash = hash * 17 + 1;
+        }
+        hash = hash * 17 + type.getName().hashCode();
+        hash = hash * 17 + killer.hashCode();
+        return hash;
     }
 }

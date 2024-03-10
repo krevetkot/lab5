@@ -23,8 +23,6 @@ public class CollectionManager {
     public static void loadCollection(String filename) throws IOException, JAXBException, FailedBuildingException {
         CollectionManager.setFileName(filename);
 
-        //ПРОВЕРИТЬ, ЧТО ДРАКОН УНИКАЛЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! в процессе
-
         BufferedReader br = new BufferedReader(new FileReader(CollectionManager.fileName));
         String body = br.lines().collect(Collectors.joining());
         StringReader reader = new StringReader(body);
@@ -32,14 +30,9 @@ public class CollectionManager {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         DragonsForParsing dragons = (DragonsForParsing) unmarshaller.unmarshal(reader);
 
-//        LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
-//        dragons.getCollectionOfDragons().clear();
-//        dragons.getCollectionOfDragons().addAll(set);
-
-        dragons.setCollectionOfDragons((ArrayList<Dragon>)
-                dragons.getCollectionOfDragons().stream().distinct().collect(Collectors.toList()));
-
-        //ей ваще пофиг на все мои телодвижения :////////
+        LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
+        dragons.getCollectionOfDragons().clear();
+        dragons.getCollectionOfDragons().addAll(set);
 
 
         boolean flag = true;
@@ -50,12 +43,9 @@ public class CollectionManager {
             }
         }
         if (flag){
-//            LinkedHashSet<Dragon> set = new LinkedHashSet<>(dragons.getCollectionOfDragons());
-//            getCollection().addAll(set);
             collectionOfDragons = dragons.getCollectionOfDragons();
             Collections.sort(collectionOfDragons);
             System.out.println("Коллекция загружена.");
-            //по идее оно должно уничтожать одинаковые экземпляры.... но чето нема
         }
         else {
             throw new FailedBuildingException("Данные в коллекции не валидны", Dragon.class);

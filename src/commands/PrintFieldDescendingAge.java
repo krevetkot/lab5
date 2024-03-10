@@ -27,6 +27,7 @@ public class PrintFieldDescendingAge extends Command{
             for (Long age: ages){
                 System.out.print(age + " ");
             }
+            System.out.println();
         }
     }
 }

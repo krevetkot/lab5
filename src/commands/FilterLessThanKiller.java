@@ -25,10 +25,12 @@ public class FilterLessThanKiller extends Command{
             }
             boolean flag = true;
             for (Dragon element: CollectionManager.getCollection()){
-                if (element.getKiller().getCountKilledDragons()<killer){
-                    System.out.println(element.toString());
-                    flag = false;
-                };
+                if (element.getKiller()!=null) {
+                    if (element.getKiller().getCountKilledDragons() < killer) {
+                        System.out.println(element);
+                        flag = false;
+                    }
+                }
             }
             if (flag) {
                 Console.print("Нет подходящих элементов.", fileMode);

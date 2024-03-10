@@ -1,10 +1,13 @@
 package commands;
 
+import exceptions.FailedBuildingException;
 import exceptions.IllegalValueException;
 import managers.CollectionManager;
 import managers.Console;
+import objects.Dragon;
 import objects.forms.DragonForm;
 
+import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -32,8 +35,19 @@ public class InsertAt extends Command{
         }
 
         DragonForm newDragon = new DragonForm();
-        CollectionManager.getCollection().add(index, newDragon.build(scanner, fileMode));
-        Console.print("Спасибо, ваши данные приняты!", fileMode);
+        try {
+            Dragon buildedDragon = newDragon.build(scanner, fileMode);
+            if (!CollectionManager.getCollection().contains(buildedDragon)){
+                CollectionManager.getCollection().add(buildedDragon);
+                Console.print("Спасибо, ваши данные приняты!", fileMode);
+            }
+            else {
+                Console.print("Такой дракон уже есть в коллекции.", false);
+            }
+        } catch (FailedBuildingException e){
+            Console.print(e.getMessage(), false);
+        }
+
     }
 
 }

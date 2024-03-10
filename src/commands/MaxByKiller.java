@@ -24,6 +24,12 @@ public class MaxByKiller extends Command{
 
             Collections.sort(dragons, new Comparator<Dragon>() {
                 public int compare(Dragon d1, Dragon d2) {
+                    if (d1.getKiller() == null){
+                        return 1;
+                    }
+                    if (d2.getKiller() == null){
+                        return -1;
+                    }
                     return Long.valueOf(d1.getKiller().getCountKilledDragons() - d2.getKiller().getCountKilledDragons()).intValue();
                 }
             });

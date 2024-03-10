@@ -1,11 +1,14 @@
 package objects;
 
+import lombok.Getter;
+
 public enum DragonType {
     WATER("WATER"),
     UNDERGROUND("UNDERGROUND"),
     AIR("AIR"),
     FIRE("FIRE");
 
+    @Getter
     private final String name;
 
     DragonType(String name){

@@ -1,5 +1,6 @@
 package objects.forms;
 
+import exceptions.FailedBuildingException;
 import exceptions.IllegalValueException;
 import managers.Console;
 import managers.IDManager;
@@ -16,7 +17,7 @@ public class DragonForm extends Form<Dragon> {
     //visibility true, когда мы работаем с консольным вводом
     //visibility false, когда мы работаем с файловым вводом
     @Override
-    public Dragon build(Scanner scanner, boolean fileMode) throws IllegalValueException {
+    public Dragon build(Scanner scanner, boolean fileMode) throws IllegalValueException, FailedBuildingException {
         Console.print("Введите данные о драконе.", fileMode);
         String name = askString(scanner, fileMode, "имя", false);
 
@@ -34,6 +35,10 @@ public class DragonForm extends Form<Dragon> {
             killer = personForm.build(scanner, fileMode);
         }
 
-        return new Dragon(IDManager.generateID(), name, coords, LocalDate.now(), age, weight, speaking, type, killer);
+        Dragon newDragon = new Dragon(IDManager.generateID(), name, coords, LocalDate.now(), age, weight, speaking, type, killer);
+        if (!Validator.dragonValidation(newDragon)){
+            throw new FailedBuildingException("Недопустимое значение в поле!", Dragon.class);
+        }
+        return newDragon;
     }
 }

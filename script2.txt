@@ -1,4 +1,9 @@
-reorder
+add
+Katya
+1
+2
+3
+4
+false
+false
 show
-reorder
-execute_file script1.txt
